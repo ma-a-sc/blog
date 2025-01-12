@@ -1,0 +1,45 @@
+---
+import Border from "./Border.astro";
+import GithubLogo from "../assets/github-mark.svg";
+---
+
+<footer class="footer">
+    <Border />
+    <div class="footerContainer">
+        <div>
+            <p>Socials:</p>
+            <a target="blank" href="https://github.com/ma-a-sc">GitHub</a>
+            <a
+                target="blank"
+                href="https://bsky.app/profile/ma-a-sc.bsky.social">BlueSky</a
+            >
+            <a target="blank" href="https://maasc.up.railway.app/">Portfolio</a>
+        </div>
+        <div>
+            <p>Other resources:</p>
+            <a rel="sitemap" href="/sitemap-index.xml">Sitemap </a>
+        </div>
+    </div>
+    <p>
+        © Mark Scharmann and Pixel & Policy, 2025. Unauthorized use and/or
+        duplication of this material without written permission from this site’s
+        author and owner is strictly prohibited. Excerpts and links may be used,
+        provided that full and clear credit is given to Mark Scharmann and Pixel
+        & Policy with appropriate and specific direction to the original
+        content.
+    </p>
+</footer>
+<style>
+    .footer {
+        bottom: 0;
+        margin-top: auto;
+        margin: 0 auto;
+    }
+    .footerContainer {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        margin-bottom: 2rem;
+    }
+</style>

@@ -1,0 +1,34 @@
+---
+const { curPost } = Astro.props;
+const tags = curPost.frontmatter.tags.split(",").map((e) => {
+    return e.trim();
+});
+---
+
+<div
+    x-data=""
+    class="postContainer"
+    x-on:click={"() => {location.href=" + "'" + curPost.url + "'" + ";}"}
+    style="cursor:pointer;"
+>
+    <a class="title" href={curPost.url}>{curPost.frontmatter.title}</a>
+    <div class="tagsContainer">
+        <span>Tags:</span>
+        {tags.map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+    <p>{curPost.frontmatter.teaser}</p>
+</div>
+<style>
+    .tagsContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    .postContainer {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .tag {
+        background: linear-gradient(to top, #90ee90 50%, transparent 50%);
+    }
+</style>

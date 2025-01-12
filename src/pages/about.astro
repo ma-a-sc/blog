@@ -1,10 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import IndexHeader from "../components/IndexHeader.astro";
 import Border from "../components/Border.astro";
 import Footer from "../components/Footer.astro";
-import Posts from "../components/RecentPosts.astro";
-import Essays from "../components/RecentEssays.astro";
+import AboutComponent from "../components/About.astro";
 import Header from "../components/Header.astro";
 import ContentLayout from "../layouts/ContentLayout.astro";
 ---
@@ -13,10 +11,7 @@ import ContentLayout from "../layouts/ContentLayout.astro";
     <ContentLayout>
         <Header />
         <Border />
-        <IndexHeader />
-        <Border />
-        <Posts />
-        <Essays />
+        <AboutComponent />
     </ContentLayout>
     <Footer />
 </Layout>

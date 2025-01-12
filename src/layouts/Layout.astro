@@ -1,22 +1,67 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <meta
+            name="description"
+            content="Marks blog, Pixel and Policy, in which he writes about coding/tech and politics. Mostly seperate from another but also with many pieces connecting the two topics"
+        />
+        <title>Pixel & Policy</title>
+    </head>
+    <body>
+        <div class="container">
+            <slot />
+        </div>
+    </body>
+    <style>
+        :root {
+            a {
+                text-decoration: none;
+            }
+            a:link {
+                color: #2563eb;
+            }
+            a:visited {
+                color: #2563eb;
+            }
+            a:hover {
+                color: #0ea5e9;
+            }
+            .title {
+                font-size: 1.5em;
+            }
+            .title:link {
+                color: #303030;
+            }
+            .title:visited {
+                color: #303030;
+            }
+            .title:hover {
+                color: #00ab41;
+            }
+        }
+    </style>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: auto;
+            width: 75%;
+        }
+        @media (max-width: 700px) {
+            .container {
+                width: 100%;
+            }
+        }
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

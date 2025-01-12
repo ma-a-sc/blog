@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import me from "../assets/me.jpeg";
+---
+
+<div class="container">
+    <div class="imageContainer">
+        <Image
+            class="img"
+            src={me}
+            alt="Mark Scharmann the author of this blog."
+        />
+    </div>
+    <div>
+        <p>
+            Welcome to my Blog. On here I write about every and anything that I
+            deem worthy to be written about. My interests are mainly in
+            Coding/Tech, Data and Politics which will be reflected in this blog.
+        </p>
+    </div>
+</div>
+<style>
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .imageContainer {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+    .img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    p {
+        padding: 1rem;
+    }
+</style>

@@ -1,0 +1,16 @@
+export const Tags = {
+  Tech: "yellow",
+  WebDev: "yellow",
+  Politics: "blue",
+  Economics: "blue",
+  Philosophy: "blue",
+  Python: "yellow",
+  JS: "yellow",
+  Go: "yellow",
+  Data: "light_green",
+  Statistics: "light_green",
+  Climate: "green",
+  AI: "yellow",
+  ML: "yellow",
+  Robotics: "yellow",
+};

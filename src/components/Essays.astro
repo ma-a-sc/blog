@@ -1,0 +1,140 @@
+---
+import { Tags } from "../js/constants.js";
+const posts = Object.values(
+    import.meta.glob("../pages/essays/*.md", { eager: true }),
+);
+---
+
+<script define:vars={{ posts, Tags }}>
+    document.addEventListener("alpine:init", () => {
+        Alpine.data("filter", () => ({
+            async init() {
+                this.posts = posts;
+                this.filteredPosts = this.posts;
+                this.$watch("titleFilter", () => this.updateFilter());
+                this.$watch("tagFilter", () => this.updateFilter());
+            },
+            posts: [],
+            titleFilter: "",
+            tagFilter: "",
+            filteredPosts: [],
+            getTags(tags) {
+                return tags.split(",").map((e) => {
+                    return e.trim();
+                });
+            },
+            updateFilter() {
+                console.log(this.titleFilter);
+                this.filteredPosts = this.posts.filter((item) => {
+                    const tags = item.frontmatter.tags.split(",").map((e) => {
+                        return e.trim();
+                    });
+                    function checkTags(tags, filter) {
+                        const found = tags.map((i) => {
+                            return (
+                                i
+                                    .toLowerCase()
+                                    .indexOf(filter.toLowerCase()) !== -1
+                            );
+                        });
+                        return found.some(Boolean);
+                    }
+                    if (this.titleFilter !== "") {
+                        if (
+                            item.frontmatter.title
+                                .toLowerCase()
+                                .indexOf(this.titleFilter.toLowerCase()) === -1
+                        ) {
+                            return false;
+                        }
+                    }
+                    if (this.tagFilter !== "") {
+                        if (!checkTags(tags, this.tagFilter)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+            },
+        }));
+    });
+</script>
+<div x-data="filter">
+    <div class="filterContainer">
+        <div class="titleFilterContainer">
+            <span>Filter by title</span>
+            <div class="filterFieldsContainer">
+                <input
+                    type="search"
+                    placeholder="Climate"
+                    x-model="titleFilter"
+                />
+            </div>
+        </div>
+        <div class="titleFilterContainer">
+            <span>Filter by tag</span>
+            <div class="filterFieldsContainer">
+                <input type="search" placeholder="Web" x-model="tagFilter" />
+            </div>
+        </div>
+    </div>
+    <h2>All Essays:</h2>
+    <div class="postsContainer">
+        <div>
+            <template x-for="post in filteredPosts">
+                <div
+                    class="postContainer"
+                    x-on:click="location.href=post.url;"
+                    style="cursor:pointer;"
+                >
+                    <a
+                        class="title"
+                        x-bind:href="post.url"
+                        x-text="post.frontmatter.title"></a>
+                    <div class="tagsContainer">
+                        <span>Tags:</span>
+                        <template x-for="tag in getTags(post.frontmatter.tags)">
+                            <span class="tag" x-text="tag"></span>
+                        </template>
+                    </div>
+                    <p x-text="post.frontmatter.teaser"></p>
+                </div>
+            </template>
+        </div>
+    </div>
+</div>
+
+<style>
+    .titleFilterContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .postsContainer {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    .filterFieldsContainer {
+        display: flex;
+        gap: 1rem;
+    }
+    .filterContainer {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+    }
+    .tag {
+        background: linear-gradient(to top, #90ee90 50%, transparent 50%);
+    }
+
+    .tagsContainer {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    .postContainer {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+</style>

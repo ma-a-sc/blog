@@ -1,0 +1,23 @@
+---
+import Post from "../components/Post.astro";
+
+let items = Object.values(
+    import.meta.glob("../pages/posts/*.md", { eager: true }),
+);
+let postsItems = items.slice(0, 3);
+---
+
+<h2>Most recent posts:</h2>
+<div class="postsContainer">
+    <div>
+        {postsItems.map((post) => <Post curPost={post} />)}
+    </div>
+</div>
+<style>
+    .postsContainer {
+        display: flex;
+        flex-direction: column;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+</style>
