@@ -10,7 +10,13 @@ let postsItems = items.slice(0, 3);
 <h2>Most recent posts:</h2>
 <div class="postsContainer">
     <div>
-        {postsItems.map((post) => <Post curPost={post} />)}
+        {
+            postsItems.length !== 0 ? (
+                postsItems.map((post) => <Post curPost={post} />)
+            ) : (
+                <p>No recent posts found </p>
+            )
+        }
     </div>
 </div>
 <style>

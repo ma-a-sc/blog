@@ -23,6 +23,22 @@ const posts = Object.values(
                     return e.trim();
                 });
             },
+            lightUpTitle(e) {
+                const target = e.target;
+                const child = target.getElementsByTagName("a")[0];
+
+                if (child) {
+                    console.log(child.classList);
+                    child.classList.add("hoverClass");
+                }
+            },
+            lightDownTitle(e) {
+                const target = e.target;
+                const child = target.getElementsByTagName("a")[0];
+                if (child) {
+                    child.classList.remove("hoverClass");
+                }
+            },
             updateFilter() {
                 console.log(this.titleFilter);
                 this.filteredPosts = this.posts.filter((item) => {
@@ -65,8 +81,9 @@ const posts = Object.values(
             <span>Filter by title</span>
             <div class="filterFieldsContainer">
                 <input
+                    class="titleFilter"
                     type="search"
-                    placeholder="Climate"
+                    placeholder="e.g. Climate"
                     x-model="titleFilter"
                 />
             </div>
@@ -74,7 +91,12 @@ const posts = Object.values(
         <div class="titleFilterContainer">
             <span>Filter by tag</span>
             <div class="filterFieldsContainer">
-                <input type="search" placeholder="Web" x-model="tagFilter" />
+                <input
+                    class="tagFilter"
+                    type="search"
+                    placeholder="e.g. Web"
+                    x-model="tagFilter"
+                />
             </div>
         </div>
     </div>
@@ -83,11 +105,14 @@ const posts = Object.values(
         <div>
             <template x-for="post in filteredPosts">
                 <div
+                    x-on:mouseover="lightUpTitle"
+                    x-on:mouseleave="lightDownTitle"
                     class="postContainer"
                     x-on:click="location.href=post.url;"
                     style="cursor:pointer;"
                 >
                     <a
+                        id="title"
                         class="title"
                         x-bind:href="post.url"
                         x-text="post.frontmatter.title"></a>
@@ -124,16 +149,13 @@ const posts = Object.values(
         gap: 0.5rem;
         justify-content: flex-end;
     }
-    .tag {
-        background: linear-gradient(to top, #90ee90 50%, transparent 50%);
-    }
-
     .tagsContainer {
         display: flex;
         flex-direction: row;
         gap: 0.5rem;
     }
     .postContainer {
+        padding: 0.2rem;
         margin-left: 2rem;
         margin-right: 2rem;
     }

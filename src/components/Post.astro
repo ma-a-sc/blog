@@ -7,11 +7,16 @@ const tags = curPost.frontmatter.tags.split(",").map((e) => {
 
 <div
     x-data=""
+    id={curPost.frontmatter.title}
     class="postContainer"
     x-on:click={"() => {location.href=" + "'" + curPost.url + "'" + ";}"}
     style="cursor:pointer;"
 >
-    <a class="title" href={curPost.url}>{curPost.frontmatter.title}</a>
+    <a
+        id={curPost.frontmatter.title + "_title"}
+        class="title"
+        href={curPost.url}>{curPost.frontmatter.title}</a
+    >
     <div class="tagsContainer">
         <span>Tags:</span>
         {tags.map((tag) => <span class="tag">{tag}</span>)}
@@ -28,7 +33,19 @@ const tags = curPost.frontmatter.tags.split(",").map((e) => {
         margin-left: 2rem;
         margin-right: 2rem;
     }
-    .tag {
-        background: linear-gradient(to top, #90ee90 50%, transparent 50%);
-    }
 </style>
+<script define:vars={{ curPost }}>
+    const postContainer = document.getElementById(curPost.frontmatter.title);
+    postContainer.addEventListener("mouseover", () => {
+        const title = document.getElementById(
+            curPost.frontmatter.title + "_title",
+        );
+        title.classList.add("hoverClass");
+    });
+    postContainer.addEventListener("mouseout", () => {
+        const title = document.getElementById(
+            curPost.frontmatter.title + "_title",
+        );
+        title.classList.remove("hoverClass");
+    });
+</script>
