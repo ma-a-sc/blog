@@ -9,7 +9,7 @@ import alpinejs from "@astrojs/alpinejs";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://pixelandpolicy.com",
+  site: "https://blog.mark-scharmann.com",
   integrations: [mdx(), sitemap(), alpinejs()],
   experimental: {
     svg: true,
