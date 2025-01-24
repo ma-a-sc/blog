@@ -10,7 +10,7 @@ import DarkModeToggle from "./DarkModeToggle.astro";
         <a href="/about">About</a>
         <a href="/contact">Contact </a>
     </nav>
-    <div>
+    <div class="darkMode">
         <DarkModeToggle />
     </div>
 </div>
@@ -19,9 +19,18 @@ import DarkModeToggle from "./DarkModeToggle.astro";
         margin-top: 2rem;
         display: flex;
         justify-content: center;
+        align-items: center;
     }
     .header {
         display: flex;
         gap: 2rem;
+    }
+    .darkMode {
+        padding-left: 2rem;
+    }
+    @media (max-width: 700px) {
+        .darkMode {
+            padding-left: 1rem;
+
     }
 </style>
